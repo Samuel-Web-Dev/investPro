@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const compression = require('compression')
+const helmet = require('helmet')
 
 const app = express()
 
@@ -9,12 +11,8 @@ const authRouter = require('./routes/auth')
 const investorRouter = require('./routes/user')
 const adminRouter = require('./routes/admin')
 
-console.log({
-    USERNAME: process.env.USERNAM,
-    PASSWORD: process.env.PASSWORD,
-    DATABASE_NAME: process.env.DATABASE_NAME
-  });
-
+app.use(helmet())
+app.use(compression())
 app.use(express.json())
 
 app.use(cors());
